@@ -93,6 +93,17 @@ class PostController extends Controller
         $data = $request->all();
         $post = Post::find($id);
 
+        if ($request->hasFile('image_path')) {
+
+            if ($post->image_path) {
+                Storage::disk('public')->delete($post->image_path);
+            }
+            // salvo img in storage, nella cartella uploads
+            $data['image_path'] = $request->file('image_path')->store('uploads', 'public');
+            // Salvo il nome originale dell'immagine
+            $data['image_original_name'] = $request->file('image_path')->getClientOriginalName();
+        }
+
         $post->update($data);
 
 
@@ -100,7 +111,7 @@ class PostController extends Controller
             $post->tags()->sync($data['tags']);
         }
 
-        return redirect()->route('admin.posts.index');
+        return redirect()->route('admin.posts.show', $id);
     }
 
     /**

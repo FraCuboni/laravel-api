@@ -34,6 +34,7 @@
                       <th scope="col">start date</th>
                       <th scope="col">tags</th>
                       <th scope="col">type</th>
+                      <th scope="col">image</th>
                       <th scope="col">actions</th>
                     </tr>
                   </thead>
@@ -44,18 +45,28 @@
                       <td>{{$post->title}}</td>
                       <td>{{$post->start_date}}</td>
                       <td>
-
-                        @forelse($post->tags as $tag)
-                        <button type="button" class="btn btn-secondary mb-1">
-                          {{$tag->name}}
-                        </button>
-                        @empty
-                            
-                        @endforelse
-                        
+                          @if($post->tags->isNotEmpty())
+                              @foreach($post->tags as $tag)
+                              <button type="button" class="btn btn-secondary mb-1">
+                              {{$tag->name}}
+                              </button>
+                              @endforeach
+                          @else
+                          <button type="button" class="btn btn btn-outline-secondary mb-1" disabled>
+                              No Tags Added
+                          </button>
+                              
+                          @endif
                       </td>
                       <td>
                         <button type="button" class="btn btn-info">{{$post->type->name}}</button>
+                      </td>
+                      <td>
+                        @if($post->image_path) 
+                        yes
+                        @else
+                        no
+                        @endif
                       </td>
                       <td>
                         <a href="{{ route('admin.posts.show', $post->id) }}">

@@ -15,7 +15,7 @@
                     <i class="fa-solid fa-plus"></i>
                   </button>
                 </div>
-            <form action="{{ route('admin.posts.update', $post) }}" method="POST">
+            <form action="{{ route('admin.posts.update', $post) }}" method="POST" enctype="multipart/form-data">
             @csrf 
             {{-- Forzo il metod da post a put --}}
             @method('PUT')
@@ -66,6 +66,14 @@
                             <label for="collaborators"><h5>collaborators</h5></label>
                             <input type="text" class="form-control" id="collaborators" name="collaborators" placeholder="collaborators"  value="{{$post->collaborators}}">
                         </div>
+                    </li>  
+
+                    
+                    <li class="list-group-item">
+                        <div class="form-group">           
+                            <label for="image_path" class="form-label">image</label>
+                            <input class="form-control" type="file" id="image_path" name="image_path" placeholder="image">
+                        </div>
                     </li>
                     
                     <li class="list-group-item">
@@ -89,7 +97,8 @@
                               id="{{$tag->id}}"
                               autocomplete="off"
                               value="{{$tag->id}}"
-                              name="tags[]">
+                              name="tags[]"
+                              @if($post->tags->contains($tag)) checked @endif>
                             <label class="btn btn-outline-primary" for="{{$tag->id}}">{{$tag->name}}</label>
 
                             @endforeach

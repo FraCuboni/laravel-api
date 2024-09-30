@@ -18,12 +18,12 @@ class PostSeeder extends Seeder
      */
     public function run(Faker $faker): void
     {
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             $post = new Post();
 
             // $train->azienda = $faker->company();
 
-            $post->title = $faker->jobTitle();
+            $post->title = $faker->jobTitle() . ' ' . $faker->postcode();
             // genero slug con l'helper
             $post->slug = Helper::generateSlug($post->title, Post::class);
             $post->type_id = Type::inRandomOrder()->first()->id; //estraggo elemento random dalla table type, prendo il primo elemento e il suo ID
