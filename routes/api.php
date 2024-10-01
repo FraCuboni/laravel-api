@@ -15,7 +15,7 @@ use App\Http\Controllers\Api\ProjectController;
 |
 */
 // rotte php verranno precedute da api/
-Route::get('/', [ProjectController::class, 'index']);                           //ALL
+Route::get('/posts', [ProjectController::class, 'index']);                           //ALL
 Route::get('/post-by-slug/{slug}', [ProjectController::class, 'postBySlug']);  //SLUG
 Route::get('/types', [ProjectController::class, 'types']);                      //TYPE-ALL            
 Route::get('/post-by-type/{slug}', [ProjectController::class, 'postByType']);  //TYPE-SLUG

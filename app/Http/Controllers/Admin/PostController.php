@@ -93,6 +93,10 @@ class PostController extends Controller
         $data = $request->all();
         $post = Post::find($id);
 
+        if ($request->has('title')) {
+            $data['slug'] = Helper::generateSlug($data['title'], Post::class);
+        }
+
         if ($request->hasFile('image_path')) {
 
             if ($post->image_path) {

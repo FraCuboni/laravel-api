@@ -12,7 +12,7 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $posts = Post::orderBy('id')->with('type', 'tags')->paginate(10);  //con with prendo anche le entità in relazione
+        $posts = Post::orderBy('id')->with('type', 'tags')->paginate(12);  //con with prendo anche le entità in relazione
         $success = true;
         $response = [
             'success' => $success,
